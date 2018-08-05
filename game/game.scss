@@ -1,0 +1,25 @@
+
+
+div {
+    height: 95vh;
+    width: 95vw;
+    background: black;
+    position: relative;
+    z-index: 1;
+    border: 0.5em double white;
+    cursor: url("./circle.png"), auto;
+
+
+    #game {
+        cursor: url("./circle.png"), auto;
+    }
+
+    * {
+        z-index: 2;
+    }
+
+    section {
+        height: 100%;
+        // background: rgba(125, 33, 222, 0.5);
+    }
+}
