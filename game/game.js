@@ -2,20 +2,10 @@ import './game.scss'
 
 const div = document.querySelector('div')
 const game = document.querySelector('canvas#game')
-
+import { resizeCanvas } from '../utils'
 
 const CTX = game.getContext('2d')
 const CELL_WIDTH = 20
-
-
-function sizeGame() {
-    game.height = div.clientHeight
-    game.width = div.clientWidth
-    // drawGrid(5, 5)
-    // world.cells = Array(div.clientHeight).fill([]).map(_ => Array(div.clientWidth).fill(0))
-}
-
-sizeGame()
 
 div.addEventListener('mousemove', function(event) {
     let {x, y} = event
@@ -27,25 +17,6 @@ div.addEventListener('mousemove', function(event) {
     //     console.log(aliveCells.delete([x, y].toString()))
     // }, 1000)
 })
-
-// function drawGrid(width, height) {
-//     const l_v = game.width / width
-//     for (let i = 0; i < l_v; i++) {
-//         CTX.beginPath()
-//         CTX.moveTo(i*width, 0)
-//         CTX.lineTo(i*width, game.height)
-//         CTX.strokeStyle = "white"
-//         CTX.stroke()
-//     }
-
-//     const l_h = game.height / height
-//     for (let i = 0; i < l_h; i++) {
-//         CTX.beginPath()
-//         CTX.moveTo(0, i*height)
-//         CTX.lineTo(game.width, i*height)
-//         CTX.stroke()
-//     }
-// }
 
 // console.log(world)
 let aliveCells = new Set()
@@ -68,7 +39,9 @@ function getNeighbours(x, y) {
 }
 
 
-window.addEventListener("resize", sizeGame)
+window.addEventListener("resize", () => {
+    resizeCanvas(game, div)
+})
 
 // CTX.font = '48px Helvetica'
 // CTX.fillText('1', 50, 50)
@@ -123,4 +96,5 @@ function animate() {
 }
 
 // setInterval(animate, 500)
+resizeCanvas(game, div)
 animate()

@@ -1,3 +1,5 @@
+import {resizeCanvas, circle as _circle, drawCircle} from '../utils'
+
 const canvas = document.querySelector('canvas');
 const CTX = canvas.getContext('2d')
 
@@ -15,40 +17,14 @@ const COLORS = [
     "#BF2A2A"
 ]
 
-// resizes the canvas to fill the window
-function sizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
 
 // returns an object with values to draw a circle
 function circle() {
-    const radius = Math.random() * 5
-    const color = COLORS[Math.floor(Math.random() * 5)]
-    const x = Math.random() * (canvas.width - 2 * radius) + radius
-    const y = Math.random() * (canvas.height - 2 * radius) + radius
     const dx = (Math.random() - 0.5)
     const dy = (Math.random() - 0.5)
+    const c = _circle(COLORS, canvas, [2, 6], dx, dy)
 
-    return {
-        x,
-        y,
-        dx,
-        dy,
-        minRadius: radius,
-        radius,
-        color
-    }
-}
-
-// draws the circle depending on the circle object. Returns the object back
-function drawCircle(c) {
-    CTX.beginPath()
-    CTX.arc(c.x, c.y, c.radius, 0, Math.PI * 2, false)
-    
-    CTX.fillStyle = c.color
-    CTX.fill()
-    return c
+    return Object.assign({}, {minRadius: c.radius}, c)
 }
 
 // updates the values of the variables and returns a new object with the new variables
@@ -120,7 +96,7 @@ function updateCircle(c) {
 function animate() {
     requestAnimationFrame(animate)
     CTX.clearRect(0, 0, canvas.width, canvas.height)
-    circles =  circles.map(c => drawCircle(updateCircle(c)))
+    circles =  circles.map(c => drawCircle(updateCircle(c), CTX))
     // if (MOUSE.clicked) {
     //     MOUSE.clicked = false
     // }
@@ -133,15 +109,16 @@ canvas.addEventListener("mousemove", function(event) {
     MOUSE.y = event.y
 })
 
-window.addEventListener("resize", sizeCanvas)
+window.addEventListener("resize", init)
 
 // canvas.addEventListener("click", function(event) {
 //     MOUSE.clicked = true
 // })
+function init() {
+    resizeCanvas(canvas)
+}
 
-sizeCanvas()
-
-
+init()
 
 let circles = []
 
@@ -154,7 +131,7 @@ for (let i = 0; i < 1000; i ++) {
     // let _dy = Math.random() < 0.5 ? dy : -dy
     
     let c = circle() 
-    drawCircle(c)
+    drawCircle(c, CTX)
     circles.push(c)
 
 }
@@ -162,5 +139,6 @@ for (let i = 0; i < 1000; i ++) {
 
 
 
-// document.body.style.background = `url(${canvas.toDataURL()})`
+// document.body.style.background = `url(${canvas.toDataURL()})
+
 animate()
