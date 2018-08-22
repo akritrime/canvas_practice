@@ -1,4 +1,4 @@
-import { drawLine, drawAxes, resizeCanvas } from '../utils'
+import { drawLine, CartesianSystem, resizeCanvas } from '../utils'
 
 const canvas = document.querySelector('canvas')
 const CTX = canvas.getContext('2d')
@@ -20,7 +20,7 @@ function walker() {
     
     const x = canvas.width / 2
     const y = canvas.height / 2
-    const color = colors[Math.floor(Math.random() * 5)]
+    const color = colors[Math.round(Math.random() * 5)]
     return {
         x,
         y,
@@ -53,10 +53,14 @@ function walk(w) {
     return {x, y, color}
 }
 let w
+let c = new CartesianSystem(canvas.width / 2, canvas.height / 2, CTX)
 
 function init() {
     resizeCanvas(canvas)
-    w = Array(100).fill(walker())
+    w = Array(100).fill(0).map(_ => walker())
+    c = new CartesianSystem(canvas.width / 2, canvas.height / 2, CTX)
+    CTX.strokeStyle = "grey"
+    c.drawAxes(canvas.height / 2, canvas.width / 2, 25, 0)
 }
 
 window.addEventListener('resize', init)
@@ -74,8 +78,7 @@ function animate() {
     requestAnimationFrame(animate)
     w = w.map(w => drawWalker(w))
     // console.log(drawWalker(w))
-    CTX.strokeStyle = "black"
-    drawAxes([0, canvas.width], [0, canvas.height], 15, CTX)
+    
 }
 
 init()

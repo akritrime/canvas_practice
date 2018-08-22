@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+    <script src="../index.js"></script>
+    <style>
+        body {
+            background-color: transparent;
+            display: grid;
+        }
+        
+        nav {
+            position: fixed;
+            height: 5rem;
+            min-width: 70%;
+            padding: 2%;
+            color: white;
+            float: left;
+            text-align: right;
+            top: 0;
+            right: 0;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            list-style: none;
+            font-size: 1.5rem;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        div#container {
+            background-color: transparent;
+            max-width: 720px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .border_box {
+            position:absolute;
+            box-sizing: border-box;
+            height: 90vh;
+            width: 90vw;
+            padding: 2%;
+            border: white double 1rem;
+        }
+
+        .title {
+             background: unset;
+             padding: 0;
+             margin: 0;
+             font-size: 4rem;
+             
+        }
+
+
+        .sub {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        #name {
+            border-bottom: 0.1rem solid white;
+        }
+         #type {
+             text-align: right;
+             font-size: 2rem;
+         }
+        #vector {
+            position: fixed;
+            /* height: 100vh;
+            width: 100vw; */
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+        <canvas id="vector"></canvas>
+        <!-- <div class="border_box"></div> -->
+        <nav>
+            <ul>
+                <li>about</li>
+                <li>projects</li>
+                <li>blog</li>
+            </ul>
+        </nav>
+        <div id="container">
+            <div id="intro">
+                <h1 class="title">Hi</h1>
+                <h1 class="title sub">i am</h1>
+                <h1 class="title" id="name">Akrtrime</h1>
+                <h1 class="title sub" id="type">developer</h1>
+            </div>
+        </div>
+        
+        <script src="vector2.js">
+            
+        </script>
+</body>
+</html>
