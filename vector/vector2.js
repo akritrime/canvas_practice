@@ -102,8 +102,8 @@ function init() {
 function animate() {
     window.requestAnimationFrame(animate)
     CTX.clearRect(0, 0, canvas.width, canvas.height)
-    ms_yellow.forEach(update(-5, 5, 0.2))
-    ms_red.forEach(update(-10, 10, 0.5))
+    ms_yellow.forEach(update(-2, 2, 0.08))
+    ms_red.forEach(update(-5, 5, 0.1))
 }
 
 window.addEventListener("mousemove", (e) => {
